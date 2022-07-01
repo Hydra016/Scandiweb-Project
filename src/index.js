@@ -1,19 +1,29 @@
-import React from "react";
-import ReactDom from "react-dom";
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { ApolloProvider } from '@apollo/react-hooks';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
-import App from "./App.js";
-
-const client = new ApolloClient({
-  uri: "http://localhost:4000/",
-  cache: new InMemoryCache(),
-});
+import reducers from './reducers';
 
 
-ReactDom.render(
-  <ApolloProvider client={client}>
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(
+    applyMiddleware(thunk)
+  ));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+      <Provider store={store}>
+
     <App />
-  </ApolloProvider>,
-  document.querySelector("#root")
+    </Provider>
+  </React.StrictMode>
 );
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();

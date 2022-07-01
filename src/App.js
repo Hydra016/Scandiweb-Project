@@ -9,16 +9,15 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 class App extends React.Component {
   render() {
     return (
-
     <div className="container">
       <BrowserRouter>
       <Navbar />
       <Switch>
-        <Route path="/" exact component={Items}/>
-        <Route path="/scandiwebproject/item/:id" exact component={Item}/>
-        <Route path="/scandiwebproject/cart" exact component={Cart}/>
+        <Route exact path="/" component={Items}/>
+        <Route exact path="/item/:id" component={Item}/>
+        {/* <Route exact path="/cart" component={Cart}/> */}
       </Switch>
-      </BrowserRouter>
+      </BrowserRouter>      
     </div>
     )
   }
