@@ -28,3 +28,10 @@ export const fetchCurrencyChange = (val) => dispatch =>  {
         payload: val
     })
 }
+
+export const fetchTitleChange = (val) => dispatch =>  {
+    dispatch({
+        type: 'get_title_val',
+        payload: val
+    })
+}

@@ -1,9 +1,9 @@
 import React from 'react';
 import './css/styles.css';
 import Navbar from './components/header';
-import Items from './components/items';
+import Items from './Screens/items';
 import Cart from './components/cart';
-import Item from './components/item';
+import Item from './Screens/item';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 class App extends React.Component {
