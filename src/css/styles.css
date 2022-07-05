@@ -433,9 +433,17 @@
     color: #000;
 }
 
-.navbar_element:hover {
+.navbar_link_selected {
     color: #5ECE7B;
     border-bottom: 2px solid #5ECE7B;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+.navbar_element:hover {
+    color: #5ECE7B;
+    /* border-bottom: 2px solid #5ECE7B; */
     cursor: pointer;
 }
 
