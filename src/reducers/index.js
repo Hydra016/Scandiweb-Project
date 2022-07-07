@@ -4,11 +4,13 @@ import getSingleItem from './getSingleItem';
 import FetchCurrencyChange from './FetchCurrencyChange';
 import getItemsByCategory from './getItemsByCategory';
 import titleReducer from './titleReducer';
+import CartReducer from './CartReducer';
 
 export default combineReducers ({
     allItems: allItemsReducers,
     singleItem: getSingleItem,
     currency: FetchCurrencyChange,
     categoryItems: getItemsByCategory,
-    title: titleReducer
+    title: titleReducer,
+    cartItems: CartReducer
 });

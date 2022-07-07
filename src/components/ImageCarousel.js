@@ -9,14 +9,13 @@ export default class ImageCarousel extends Component {
     }
 
   render() {
-    console.log(this.state.image)
     return (
         <>
         <div className="item_panel">
         {
             this.props.item.map((el) => {
                 return (
-                    <a className="item_img_link" onClick={() => this.setState({ image: el })}>
+                    <a key={el} className="item_img_link" onClick={() => this.setState({ image: el })}>
             <div className="items_item">
                 <img className="items_img" src={el} alt="" />
             </div>
