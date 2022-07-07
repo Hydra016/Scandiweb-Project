@@ -47,7 +47,7 @@ class Cart extends React.Component {
                         </a>
                     </div>
                     <div class="cart_item_img">
-                        <img src="Product D.png" alt="" class="cart_item_image" />
+                        <img src="" alt="" class="cart_item_image" />
                         <div class="cart_item_link-align">
                             <div class="cart_xyz">
                                 <a href="#" class="cart_item_link">&#60;</a>
@@ -99,7 +99,7 @@ class Cart extends React.Component {
                         </a>
                     </div>
                     <div class="cart_item_img">
-                        <img src="Product D.png" alt="" class="cart_item_image" />
+                        <img src="" alt="" class="cart_item_image" />
                         <div class="cart_item_link-align">
                             <div class="cart_xyz">
                                 <a href="#" class="cart_item_link">&#60;</a>

@@ -102,9 +102,9 @@ class CartDropDown extends React.Component {
                     <p className="cart_view_footer-amount">$125.00</p>
                 </div>
                 <div className="cart_view_footer-buttons">
-                    <button className="cart_view_footer-button cart_view_footer-view">
+                    <Link to={'/cart'} className="cart_view_footer-button cart_view_footer-view">
                         View Bag
-                    </button>
+                    </Link>
                     <Link to="/scandiwebproject/cart" className="cart_view_footer-button cart_view_footer-checkOut">
                         Check Out
                     </Link>

@@ -1,22 +1,34 @@
 import React from 'react';
 import ImageCarousel from '../components/ImageCarousel';
-import { fetchSingleItem, fetchCurrencyChange } from '../actions';
+import { fetchSingleItem, fetchCurrencyChange, postCartItems } from '../actions';
 import { connect } from 'react-redux';
+import Attributes from '../components/Attributes';
 
 class Item extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            item: {
-                size: null
-            }
-        };
+        this.state = {};
+        this.setAttributes.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         const { id } = this.props.match.params
         this.props.fetchSingleItem(id)
+        const item = this.props.item;
+        if (item) {
+            this.setState({
+                ...this.state,
+                id: item.id,
+                img: item.gallery[0],
+                brand: item.brand,
+                name: item.name,
+                inStock: item.inStock
+            })
+        }
+    }
 
+    setAttributes = (name, value) => {
+        this.setState({ ...this.state, [name]: value })
     }
 
     renderPrice = (price) => {
@@ -29,62 +41,38 @@ class Item extends React.Component {
         }
     }
 
-    //rendering detials
-
-    renderDetails = (name, arr) => {
+    handleSubmit = () => {
         const item = this.props.item;
         if (item) {
-            if(name === "Color") {
-                return arr.map(el => {
-                    return <a href='#'><div style={{ width: 20, height: 20, backgroundColor: el.value }}></div></a>
-                    })
-                    
+            const attributes = item.attributes;
+            let result = [];
+            attributes.map(el => {
+                result.push(el.name in this.state)
+            })
+            let final = result.every(el => el === true);
+            if (final) {
+                this.props.postCartItems(this.state)
+                alert('item added!')
+            } else {
+                alert('please select all')
             }
-            return (
-                <div className="item_sizes">
-                    <div>
-                        <p className="item_size_paragraph">{name}</p></div>
-                    <div>
-                        {arr.map(el => {
-                            return (
-                                <div className="item_size_boxes">
-                                    <a href="#" className="size_box_el">
-                                        <div className="item_size_box">
-                                            {el.value}
-                                        </div>
-                                    </a>
-
-
-                                </div>
-                            )
-                        })}
-                    </div>
-                </div>
-            )
         }
     }
 
     renderItem() {
         const item = this.props.item;
         if (item) {
-            // console.log(item.prices)
             return (
                 <div className="items">
                     <ImageCarousel item={item.gallery} />
                     <div className="item_description">
-                        <div className="item_desc">
-                            <p className="item_desc_heading">{item.brand}</p>
-                            <p className="item_desc_paragraph">{item.name}</p>
-                        </div>
-                            {item.attributes.map(el => {
-                                return this.renderDetails(el.name, el.value || el.items)
-                            })}
+                        <Attributes item={item} setAttributes={this.setAttributes} />
                         <div className="item_others">
                             <div className="item_amountandprice">
                                 <p className="item_price">price</p>
                                 {this.renderPrice(item.prices)}
                             </div>
-                            <button className="item_addToCart">Add To Cart</button>
+                            <button onClick={this.handleSubmit} className="item_addToCart">Add To Cart</button>
                         </div>
                         <div className="item_info">
                             <p className="item_info_paragraph">
@@ -112,7 +100,7 @@ class Item extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { item: state.allItems.product, currency: state.currency }
+    return { item: state.allItems.product, currency: state.currency, cartItems: state.cartItems }
 }
 
-export default connect(mapStateToProps, { fetchSingleItem, fetchCurrencyChange })(Item)
+export default connect(mapStateToProps, { fetchSingleItem, fetchCurrencyChange, postCartItems })(Item)

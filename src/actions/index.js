@@ -35,3 +35,10 @@ export const fetchTitleChange = (val) => dispatch =>  {
         payload: val
     })
 }
+
+export const postCartItems = (obj) => dispatch => {
+    dispatch({
+        type: 'post_cart_items',
+        payload: obj
+    })
+}
