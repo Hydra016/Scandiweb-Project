@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import item from '../Screens/item';
+import ColorSwatch from './ColorSwatch';
 
 export default class Attributes extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ export default class Attributes extends Component {
         if (item) {
             if (name === "Color") {
                 return arr.map(el => {
-                    return <a onClick={() => this.props.setAttributes(name, el.value)}><div style={{ width: 20, height: 20, backgroundColor: el.value }}></div></a>
+                    return <a onClick={() => this.props.setAttributes(name, el.value)}><ColorSwatch value={el.value} /></a>
                 })
 
             }

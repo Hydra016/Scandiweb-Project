@@ -60,7 +60,7 @@ class Items extends React.Component {
   }
 
   render() {
-    console.log(this.props.items)
+    // console.log(this.props.state)
     return (
       <div>
         <div className="heading">
@@ -75,7 +75,7 @@ class Items extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { items: state.allItems, item: state.singleItem, currency: state.currency, categoryItems: state.categoryItems, title: state.title }
+  return { state: state, items: state.allItems, item: state.singleItem, currency: state.currency, categoryItems: state.categoryItems, title: state.title }
 }
 
 export default connect(mapStateToProps, { fetchAll, fetchSingleItem, fetchCurrencyChange, getCategoryItems })(Items);
