@@ -952,6 +952,7 @@
 
 .cart_item_link {
     display: none;
+    cursor: pointer;
 }
 
 .cart_item_link-align {
@@ -1126,6 +1127,19 @@ border-radius: 0px; */
     align-items: center;
     justify-content: center;
     margin-right: 1rem;
+}
+
+.cart_view-attributes {
+    display: flex;
+    margin-top: '20px'
+    /* border: 1px solid #000;
+    width: '50%'; */
+}
+
+.cart_view-attribute-text {
+    border: 1px solid #000;
+    width: 20;
+    height: 20;
 }
 
 .cart_view_item-sizeBox:hover {

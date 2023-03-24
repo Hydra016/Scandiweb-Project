@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 export default class ImageSlider extends Component {
     constructor(props) {
@@ -8,62 +9,40 @@ export default class ImageSlider extends Component {
             count: 0
         };
     }
-    // setImage = (direction) => {
-    //     const images = this.props.images;
-    //     if (this.state.imgIndex !== images.length) {
-    //         if (direction == 'right') {
-    //             this.setState({ ...this.state, imgIndex: this.state.imgIndex + 1 })
-    //         } else if (direction === 'left') {
-    //             this.setState({ ...this.state, imgIndex: this.state.imgIndex - 1 })
-    //         }
-    //     } else if(this.state.imgIndex === images.length) {
-    //         console.log()
-    //         console.log(this.state.imgIndex)
-    //         this.setState({...this.state, imgIndex: 0})
-    //     }
-    // }
-
-    nextImage = () => {
+    setImage = (direction) => {
         const images = this.props.images;
-        if(this.state.imgIndex !== images.length) {
-            this.setState({...this.state, imgIndex: this.state.imgIndex + 1})
-        } else if (this.state.imgIndex === images.length) {
-            this.setState({...this.state, imgIndex: 0})
-        }
-    }
-
-    setCount = () => {
-        this.setState({...this.state, count: this.state.count + 1})
-        console.log(this.state.count)
-        if(this.state.count === 5) {
-            
-            console.log('done');
+        if (this.state.imgIndex !== images.length - 1 && direction == 'right') {
+            this.setState({ ...this.state, imgIndex: this.state.imgIndex + 1 })
+        } else if (this.state.imgIndex !== 0 && direction === 'left') {
+            this.setState({ ...this.state, imgIndex: this.state.imgIndex - 1 })
+        } else if (this.state.imgIndex === images.length - 1 && direction === 'right') {
+            this.setState({ ...this.state, imgIndex: 0 })
+        } else if (this.state.imgIndex === 0 && direction === 'left') {
+            this.setState({ ...this.state, imgIndex: images.length - 1 })
         }
     }
 
     renderImage = () => {
         const images = this.props.images;
-
+        const propClass = this.props.dynamicClass;
         return (
             <div>
-                <img src={images.length !== 1 ? images[this.state.imgIndex] : images[0]} alt="" className="cart_view_item-img" />
                 {images.length !== 1 ? (
-                    <div className='cart_view_item-img-buttons'>
-                        <div>
-                            <a onClick={() => this.setImage('left')}>L</a>
-                        </div>
-                        <div>
-                            <a onClick={() => this.nextImage()}>R</a>
+                    <div className="cart_item_img">
+                    <img src={images[this.state.imgIndex]} alt="" className={propClass} />
+                    <div className="cart_item_link-align">
+                        <div className="cart_xyz">
+                            <a onClick={() => this.setImage('right')} className="cart_item_link">&#60;</a>
+                        <a onClick={() => this.setImage('left')} className="cart_item_link">&#62;</a>
                         </div>
                     </div>
-                ) : null}
+                </div>
+                ) : <img src={images[0]} alt="" className={propClass} />}
             </div>
         )
     }
 
     render() {
-        // console.log(this.props.images.length)
-        // console.log(this.state.imgIndex)
         return (
             <div>{this.renderImage()}</div>
         )

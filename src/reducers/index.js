@@ -5,6 +5,7 @@ import FetchCurrencyChange from './FetchCurrencyChange';
 import getItemsByCategory from './getItemsByCategory';
 import titleReducer from './titleReducer';
 import CartReducer from './CartReducer';
+import quantityChanger from './quantityChanger';
 
 export default combineReducers ({
     allItems: allItemsReducers,
@@ -12,5 +13,5 @@ export default combineReducers ({
     currency: FetchCurrencyChange,
     categoryItems: getItemsByCategory,
     title: titleReducer,
-    cartItems: CartReducer
+    cartItems: CartReducer,
 });

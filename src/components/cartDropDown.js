@@ -12,7 +12,7 @@ class CartDropDown extends React.Component {
                     My Bag,
                 </p>
                 <p className="cart_view_header-item">
-                    2 items
+                    {this.props.items.length} items
                 </p>
             </div>
             <CartItem item={this.props.items} />

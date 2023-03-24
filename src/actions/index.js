@@ -42,3 +42,24 @@ export const postCartItems = (obj) => dispatch => {
         payload: obj
     })
 }
+
+export const quantityInc = (obj) => dispatch => {
+    dispatch({
+        type: 'quantity_inc',
+        payload: obj
+    })
+}
+
+export const quantityDec = (obj) => dispatch => {
+    dispatch({
+        type: 'quantity_dec',
+        payload: obj
+    })
+}
+
+export const removeItem = (obj) => dispatch => {
+    dispatch({
+        type: 'remove_item',
+        payload: obj
+    })
+}

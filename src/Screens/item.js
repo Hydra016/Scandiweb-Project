@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
 class Item extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            selected: {}
+        };
         this.setAttributes.bind(this);
     }
 
@@ -35,18 +37,19 @@ class Item extends React.Component {
     //   }
 
     setAttributes = (name, value) => {
-        this.setState({ ...this.state, [name]: value })
         const item = this.props.item;
         if (item) {
             this.setState({
                 ...this.state,
+                itemId: Math.floor(Math.random() * 9999999),
                 id: item.id,
                 img: item.gallery,
                 brand: item.brand,
                 name: item.name,
                 inStock: item.inStock,
                 attributes: item.attributes,
-                qty: 1
+                qty: 0,
+                selected: {...this.state.selected, [name]: value } 
             })
         }
     }
@@ -67,10 +70,10 @@ class Item extends React.Component {
             const attributes = item.attributes;
             let result = [];
             attributes.map(el => {
-                result.push(el.name in this.state)
+                result.push(el.name in this.state.selected)
             })
             let final = result.every(el => el===true);
-            if(final) {
+            if(final || undefined) {
                 this.props.postCartItems(this.state)
                 alert('item added')
             } else {
@@ -81,6 +84,7 @@ class Item extends React.Component {
 
     renderItem() {
         const item = this.props.item;
+        console.log(this.props.cartItems)
         if (item) {
             return (
                 <div className="items">
@@ -93,7 +97,8 @@ class Item extends React.Component {
                                 {this.renderPrice(item.prices)}
                             </div>
                             {item.inStock ? (
-                                <Link to={'/'} onClick={this.handleSubmit} className="item_addToCart">Add To Cart</Link>
+                                // <Link to={'/'} onClick={() => console.log(this.state)} className="item_addToCart">Add To Cart</Link>
+                                <button onClick={this.handleSubmit} className="item_addToCart">add</button>
                             ) : (
                                 <button disabled className="item_addToCart_disabled">Add To Cart</button>
                             )}
@@ -112,14 +117,7 @@ class Item extends React.Component {
         }
     }
 
-    displayCartData = () => {
-        if(this.props.cartItems) {
-            console.log(this.props.cartItems)
-        }
-    }
-
     render() {
-        console.log(this.props.cartItems)
         return (
             <>
                 {this.renderItem()}
